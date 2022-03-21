@@ -54,9 +54,9 @@ export default function Index() {
   const products = useLoaderData();
 
   return (
-    <ul className="products grid gap-3 grid-cols-3">
+    <ul className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-">
       {products.map((p: any) => (
-        <li key={p.path}>
+        <li key={p.path} className="flex">
           <ProductCard product={p} />
         </li>
       ))}
@@ -69,10 +69,14 @@ function ProductCard({ product }: { product: any }) {
     <Link
       prefetch="intent"
       to={product.path}
-      className="bg-white p-2 drop-shadow rounded block"
+      className="block flex flex-col justify-between"
     >
-      <Image {...product.defaultVariant.firstImage} />
-      <h2 className="text-xl">{product.name}</h2>
+      <Image
+        {...product.defaultVariant.firstImage}
+        className="block w-full"
+        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+      />
+      <h2 className="text-lg text-center mt-2">{product.name}</h2>
     </Link>
   );
 }
