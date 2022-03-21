@@ -16,7 +16,7 @@ export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "⚡️",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -42,16 +42,12 @@ export default function App() {
 function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="lg:w-content w-full mx-auto p-8 sm:px-6">
-      <header className="remix-app__header">
-        <div className="container remix-app__header-content flex justify-between">
-          <Link prefetch="intent" to="/">
-            <img src="/logo.svg" alt="dounot logo" />
-          </Link>
-        </div>
+      <header className="container flex justify-between mb-4">
+        <Link prefetch="intent" to="/">
+          <img src="/logo.svg" alt="dounot logo" className="block" />
+        </Link>
       </header>
-      <div className="remix-app__main">
-        <main>{children}</main>
-      </div>
+      <main>{children}</main>
     </div>
   );
 }
