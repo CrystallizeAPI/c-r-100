@@ -1,5 +1,7 @@
 import { Image } from "@crystallize/react-image";
 import { json, Link, useLoaderData } from "remix";
+import { Price } from "~/components/price";
+import { useScreens } from "../hooks/tailwind";
 
 function removeShopFromPath(item: any) {
   return {
@@ -54,17 +56,21 @@ export default function Index() {
   const products = useLoaderData();
 
   return (
-    <ul className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-">
-      {products.map((p: any) => (
-        <li key={p.path} className="flex">
-          <ProductCard product={p} />
-        </li>
-      ))}
-    </ul>
+    <main>
+      <ul className="flex flex-row flex-wrap">
+        {products.map((p: any) => (
+          <li key={p.path} className="flex w-1/2 md:w-1/3">
+            <ProductCard product={p} />
+          </li>
+        ))}
+      </ul>
+    </main>
   );
 }
 
 function ProductCard({ product }: { product: any }) {
+  const screens = useScreens();
+
   return (
     <Link
       prefetch="intent"
@@ -74,9 +80,12 @@ function ProductCard({ product }: { product: any }) {
       <Image
         {...product.defaultVariant.firstImage}
         className="block w-full"
-        sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+        sizes={`(min-width: ${screens.md}) 33vw - calc(calc(100vw - ${screens.md}) / 3), 50vw`}
       />
-      <h2 className="text-lg text-center mt-2">{product.name}</h2>
+      <div className="text-center">
+        <h2 className="text-lg text-center mt-2">{product.name}</h2>
+        <Price productVariant={product.defaultVariant} />
+      </div>
     </Link>
   );
 }
