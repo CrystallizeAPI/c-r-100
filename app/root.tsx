@@ -45,8 +45,8 @@ export default function App() {
 
 function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="container mx-auto p-8 sm:px-6 max-w-7xl">
-      <header className="mb-4">
+    <div>
+      <header className="container mx-auto p-8 sm:px-6 max-w-7xl mb-4">
         <Link prefetch="intent" to="/">
           <img src="/logo.svg" alt="dounot logo" className="block" />
         </Link>

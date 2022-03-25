@@ -3,24 +3,19 @@ import { json, Link, useLoaderData } from "remix";
 import { Price } from "~/components/price";
 import { useScreens } from "../hooks/tailwind";
 
-function removeShopFromPath(item: any) {
-  return {
-    ...item,
-    path: item.path.replace(/^\/shop/, ""),
-  };
-}
-
 export async function loader() {
   // Get some donuts
-  const response = await fetch("https://api.crystallize.com/dounot/catalogue", {
-    method: "post",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
+  const response = await fetch(
+    "https://api.crystallize.com/learning-with-jason-prep/catalogue",
+    {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
         {
-          catalogue(path: "/shop") {
+          catalogue(path: "/") {
             children {
               path
               name
@@ -43,20 +38,17 @@ export async function loader() {
           }
         }
       `,
-    }),
-  });
-  return json(
-    await response
-      .json()
-      .then((c) => c.data.catalogue.children.map(removeShopFromPath))
+      }),
+    }
   );
+  return json(await response.json().then((c) => c.data.catalogue.children));
 }
 
 export default function Index() {
   const products = useLoaderData();
 
   return (
-    <main>
+    <main className="container mx-auto p-8 sm:px-6 max-w-7xl">
       <ul className="flex flex-row flex-wrap">
         {products.map((p: any) => (
           <li key={p.path} className="flex w-1/2 md:w-1/3">
