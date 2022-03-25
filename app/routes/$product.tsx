@@ -77,7 +77,7 @@ export default function Product() {
           <h1 className="text-3xl mb-5">{product.name}</h1>
           <Price productVariant={product.defaultVariant} className="text-xl" />
         </div>
-        <Image {...product.defaultVariant.firstImage} />
+        <Image {...product.defaultVariant.firstImage} className="my-6" />
       </div>
 
       {/* Product story here */}
