@@ -18,7 +18,7 @@ export const links: LinksFunction = () => [
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "⚡️",
+  title: "Donuts",
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -45,8 +45,8 @@ function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
       <header className="container mx-auto p-8 sm:px-6 max-w-7xl mb-4">
-        <Link prefetch="intent" to="/">
-          <img src="/logo.svg" alt="dounot logo" className="block" />
+        <Link prefetch="intent" to="/" className="text-6xl">
+          🍩
         </Link>
       </header>
       {children}
