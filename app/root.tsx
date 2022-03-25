@@ -11,11 +11,9 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 import tailwindStyles from "./tailwind.css";
-import globalStyles from "./global.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStyles },
-  { rel: "stylesheet", href: globalStyles },
 ];
 
 export const meta: MetaFunction = () => ({
