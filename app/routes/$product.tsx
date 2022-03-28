@@ -77,7 +77,12 @@ export default function Product() {
           <h1 className="text-3xl mb-5">{product.name}</h1>
           <Price productVariant={product.defaultVariant} className="text-xl" />
         </div>
-        <Image {...product.defaultVariant.firstImage} className="my-6" />
+        <Image
+          {...product.defaultVariant.firstImage}
+          className="my-6"
+          sizes="450px"
+          loading="eager"
+        />
       </div>
 
       {/* Product story here */}
@@ -98,7 +103,8 @@ export default function Product() {
                       className="mt-6"
                       key={image.url}
                       {...image}
-                      sizes={`(min-width: ${screens.md} 100vw - ) 100wv`}
+                      loading="lazy"
+                      sizes={`(min-width: ${screens.md}) 580px, 100wv`}
                     />
                   ))}
                 </div>
