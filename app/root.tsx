@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import {
   Link,
   Links,
@@ -11,6 +11,12 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 import tailwindStyles from "./tailwind.css";
+
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+  }
+}
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStyles },
@@ -62,6 +68,21 @@ export default function App() {
 }
 
 function Layout({ children }: { children: ReactNode }) {
+  useEffect(() => {
+    const r = window.requestIdleCallback;
+    if (r) {
+      r(function () {
+        setTimeout(function () {
+          if (window.dataLayer) {
+            window.dataLayer.push({
+              event: "page-is-idle",
+            });
+          }
+        }, 3000);
+      });
+    }
+  }, []);
+
   return (
     <div>
       <header className="container mx-auto p-8 sm:px-6 max-w-7xl mb-4">
